@@ -19,9 +19,9 @@ void main() {
 	int n = 15;
 	double step = (b - a) / 10;
 	for (double x = a; x <= b; x += step) { // перебираем х от а до b с требуемым шагом
-		double res = 2 * (pow(cos(x), 2) - 1);
-		double sum_n = calc_by_n(x, n);
-		double sum_e = calc_by_e(x);
+		double res = 2 * (pow(cos(x), 2) - 1); // вычисляем точное значение
+		double sum_n = calc_by_n(x, n); // вычисляем сумму по n
+		double sum_e = calc_by_e(x); // вычисляем сумму по точности
 		printf("X=%f SN=%f SE=%f Y=%f\n", x, sum_n, sum_e, res); // выводим значения для текущего х
 	}
 	system("PAUSE");
@@ -69,6 +69,6 @@ double calc_by_e(double x) {
 		current_mem = find_seq_member(x, current_n);
 		res += current_mem; // прибавляем последовательно члены последовательности
 		current_n++; // увеличиваем текущую длину
-	} while (abs(current_mem) >= E); // пока разница между точным и текущим значениями не достигнет точности
+	} while (abs(current_mem) >= E); // пока член последовательности не достигнет точности
 	return res;
 }
