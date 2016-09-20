@@ -18,5 +18,13 @@
     <ClCompile Include="funcseq.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="lib.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
