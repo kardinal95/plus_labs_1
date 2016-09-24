@@ -1,55 +1,70 @@
 ﻿#include <iostream>
 #include "lib.h"
 
-double find_exact(double x) {
-	/*
-	Возвращает точное значение функции для заданного х
-	*/
+/*
+Возвращает точное значение заданной функции
+x - параметр функции; любое число
+*/
+double find_exact(double x)
+{
 	return 2 * (pow(cos(x), 2) - 1);
 }
 
-double find_seq_member(double x, int n) {
-	/*
-	Возвращает n-ный член степенного ряда для данного x
-	*/
-	double res = pow(-1, n) * (pow((2 * x), (2 * n)) / fact(2 * n));
-	return res;
+/*
+Возвращает n-ный член заданного степенного ряда (по формуле) для данного x
+n - порядковый номер искомого члена последовательности; целое число больше нуля
+x - параметр функции; любое число
+*/
+double find_seq_member(double x, int n)
+{
+	double result = pow(-1, n) * (pow((2 * x), (2 * n)) / fact(2 * n));
+	return result;
 }
 
-double fact(int inp) {
-	/*
-	Возвращает факториал для данного inp
-	*/
-	double res = 1.0;
-	for (int i = inp; i > 0; i--) {
-		res *= i;
+/*
+Возвращает факториал для числа
+num - число, для которого ищется факториал; целое число больше нуля
+*/
+double fact(int num)
+{
+	double result = 1.0;
+	for (int i = num; i > 0; i--)
+	{
+		result *= i;
 	}
-	return res;
+	return result;
 }
 
-double calc_by_n(double x, int n) {
-	/*
-	Возвращает значение суммы степенного ряда длиной n для данного x
-	*/
-	double res = 0.0;                 // для нулевой длины - возвращаем ноль
-	for (int i = 1; i <= n; i++) {
-		res += find_seq_member(x, i); // прибавляем последовательно члены последовательности
+/*
+Возвращает значение суммы заданного степенного ряда длиной n для данного x
+n - длина искомого степенного ряда; целое число
+x - параметр функции; любое число
+*/
+double calc_by_n(double x, int n)
+{
+	double result = 0.0;                 // для нулевой длины - возвращаем ноль
+	for (int i = 1; i <= n; i++)
+	{
+		result += find_seq_member(x, i); // прибавляем последовательно члены последовательности
 	}
-	return res;
+	return result;
 }
 
-double calc_by_e(double x) {
-	/*
-	Возвращает значение суммы степенного ряда для данного x с точностью 0.0001
-	*/
-	const double E = 0.0001;         // требуемая точность
-	int current_n = 1;               // текущая длина последовательности
-	double res = 0.0;
-	double current_mem;              // текущий член последовательности
-	do {
-		current_mem = find_seq_member(x, current_n);
-		res += current_mem;          // прибавляем последовательно члены последовательности
-		current_n++;                 // увеличиваем текущую длину
-	} while (abs(current_mem) >= E); // пока член последовательности не достигнет точности
-	return res;
+/*
+Возвращает значение суммы степенного ряда для данного x с искомой точностью accuracy
+accuracy - необходимая точность; положительное число
+x - параметр функции; любое число
+*/
+double calc_by_e(double x, double accuracy)
+{
+	int current_n = 1;                   // текущая длина последовательности
+	double result = 0.0;
+	double current;                      // текущий член последовательности
+	do
+	{
+		current = find_seq_member(x, current_n);
+		result += current;               // прибавляем последовательно члены последовательности
+		current_n++;                     // увеличиваем текущую длину
+	} while (abs(current) >= accuracy);  // пока член последовательности не достигнет точности
+	return result;
 }
